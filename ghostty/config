@@ -1,0 +1,19 @@
+font-family = Maple Mono NF CN
+font-style = Light
+font-size = 16
+theme = everforest-dark-medium
+
+background-opacity = 0.9
+background-blur = true
+
+maximize = true
+confirm-close-surface = false
+clipboard-read = allow 
+clipboard-write = allow
+clipboard-paste-protection = true
+
+cursor-style-blink = true
+mouse-hide-while-typing = true
+
+# custom-shader = "~/.config/ghostty/shaders/debug_cursor_animated.glsl"
+# custom-shader-animation = true

@@ -14,21 +14,20 @@ inoremap { {}<left>
 inoremap ' ''<left>
 inoremap " ""<left>
 
-map <F9> :call File()<CR>
+map <F5> :call File()<CR>
 map <F11> :call Run()<CR>
 
 func! File()
-	exec ":vnew %<.out"
+	exec ":!touch %<.in %<.out"
+	exec ":vsp %<.out"
 	exec ":wincmd L"
 	exec ":50wincmd <"
-	exec ":w"
-	exec ":new %<.in"
-	exec ":w"
+	exec ":sp %<.in"
 	exec ":wincmd h"
 endfunc
 
 func! Run()
 	exec ":wa"
 	exec ":!g++ -DLOCAL -std=c++23 -Ofast -Wall -static % -o %<"
-	exec ":!./%<"
+	exec ":!time ./%<"
 endfunc

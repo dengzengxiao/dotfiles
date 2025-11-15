@@ -138,9 +138,9 @@ unset key
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Aliases
-
+# Proxy
 alias proxy="export HTTP_PROXY=http://172.23.176.1:7897 export HTTPS_PROXY=http://172.23.176.1:7897 export ALL_PROXY=http://172.23.176.1:7897"
+alias et="mkdir executables testcases"
 
 # Faster completion
 unsetopt pathdirs
@@ -157,3 +157,8 @@ export DESKTOP_SESSION=plasma
 export XDG_SESSION_TYPE=x11
 export XDG_CURRENT_DESKTOP=KDE
 export QT_QPA_PLATFORM=xcb
+
+# Zoxide
+eval "$(zoxide init zsh)"
+alias cd=z
+

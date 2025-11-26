@@ -12,7 +12,7 @@ config.underline_thickness = "1pt"
 
 config.window_close_confirmation = "NeverPrompt"
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
-config.window_background_opacity = 0.33
+config.window_background_opacity = 0.63
 config.win32_system_backdrop = "Acrylic"
 
 config.default_domain = "WSL:archlinux"
@@ -32,3 +32,4 @@ config.default_cursor_style = "BlinkingBlock"
 config.cursor_blink_rate = 650
 
 return config
+

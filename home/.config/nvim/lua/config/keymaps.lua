@@ -19,6 +19,5 @@ vim.keymap.set("i", "<F11>", "<Cmd>CompetiTest run<CR>", opts)
 -- CompetiTest receive shortcut: <leader>cx
 vim.keymap.set("n", "<leader>cx", "<Cmd>CompetiTest receive problem<CR>", opts)
 
--- For convenience: change numpad 5 ==> Esc, <leader>cL ==> LspRestart
+-- For convenience: change numpad 5 ==> Esc
 vim.keymap.set("i", "<kOrigin>", "<esc>", opts)
-vim.keymap.set("n", "<leader>cL", "<Cmd>LspRestart<CR>", opts)

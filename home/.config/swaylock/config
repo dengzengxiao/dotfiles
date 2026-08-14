@@ -1,0 +1,22 @@
+trace
+show-failed-attempts
+fade-in=0.5
+
+indicator
+clock
+timestr=%T
+datestr=%Y-%m-%d
+effect-blur=7x5
+font=LXGW WenKai Screen
+
+text-color=D3C6AA
+inside-color=00000000
+inside-clear-color=DBBC7F
+inside-wrong-color=E67E80
+inside-ver-color=7FBBB3
+ring-color=2D353B
+line-color=343F44
+separator-color=343F44
+key-hl-color=A7C080
+bs-hl-color=E69875
+

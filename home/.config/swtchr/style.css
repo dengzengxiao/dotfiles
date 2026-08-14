@@ -1,0 +1,40 @@
+window {
+    background-color: transparent;
+}
+
+#overlay {
+    background-color: #374145ee;
+    padding: 10px 10px;
+    border-radius: 9px;
+}
+
+.app-icon {
+    padding: 10px;
+    min-width: 80px;
+    background: transparent;
+    border-radius: 10px;
+    border: none;
+}
+
+.app-icon:hover,
+.app-icon:focus {
+    /*
+     * Adapted from the default Adwaita style sheet to mimic the focus ring that
+     * elements get when they're focused with the keyboard.
+     *
+     * https://gitlab.gnome.org/GNOME/gtk/-/blob/main/gtk/theme/Default/_drawing.scss
+     */
+    transition-property: outline, outline-width, outline-offset, outline-color;
+    transition-duration: 300ms;
+    animation-timing-function: ease-in-out;
+    outline-width: 2px;
+    outline-offset: -2px;
+
+    outline-color: #D3C6AA90;
+    background-color: #cdd6f414;
+}
+
+#window-title {
+    font-size: 13pt;
+    color: #D3C6AA;
+}

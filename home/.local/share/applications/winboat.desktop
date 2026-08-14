@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=WinBoat
+Comment=Run Windows applications on Linux
+Exec=env PATH=/home/dengzengxiao/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin /home/dengzengxiao/.local/src/winboat-0.9.0-x86_64.AppImage %U
+TryExec=/home/dengzengxiao/.local/src/winboat-0.9.0-x86_64.AppImage
+# Exec=/home/dengzengxiao/.local/src/winboat-0.9.0-x86_64.AppImage
+Terminal=false
+Categories=Utility;
+StartupNotify=true

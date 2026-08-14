@@ -1,0 +1,15 @@
+[Unit]
+Description=Update dae subscriptions and reload config
+After=network-online.target dae.service
+Wants=network-online.target
+Requires=dae.service
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/sh -c 'until systemctl is-active --quiet dae.service; do sleep 1; done'
+ExecStart=/usr/local/bin/update-dae-subs.sh
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target

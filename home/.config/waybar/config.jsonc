@@ -1,0 +1,124 @@
+// -*- mode: jsonc -*-
+{
+    "reload_style_on_change": true,
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 5,
+    "modules-left": [
+        "sway/workspaces",
+        "sway/window"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "bluetooth",
+        "cpu",
+        "memory",
+        "temperature",
+        "battery",
+        "tray"
+    ],
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}"
+    },
+    "sway/window": {
+        "max-length": 60,
+        "separate-outputs": true
+    },
+    "clock": {
+        "format": "{:%Y-%m-%d %a %H:%M}",
+        "format-alt": "{:%H:%M:%S}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "pulseaudio": {
+        "format": "{volume}% {icon}",
+        "format-muted": "静音 ",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "default": [
+                "",
+                "",
+                ""
+            ]
+        },
+        "on-click": "pavucontrol"
+    },
+    "network": {
+        "format-wifi": "{signalStrength}% ",
+        "format-ethernet": "{ipaddr} ",
+        "format-linked": "{ifname} ",
+        "format-disconnected": "断网 󰖪",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "tooltip-format-wifi": "{essid}\n{signalStrength}%",
+        "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}"
+        // "on-click": "ghostty -e nmtui"
+    },
+    "bluetooth": {
+        "format": "{icon}",
+        "format-connected": "{num_connections} {icon}",
+        "format-connected-battery": "{device_battery_percentage}% {icon}",
+        "format-icons": {
+            "enabled": "",
+            "connected": "",
+            "disabled": "󰂲",
+            "off": "󰂲"
+        },
+        "tooltip-format": "蓝牙：{status}",
+        "tooltip-format-connected": "{device_alias}",
+        "on-click": "blueman-manager"
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false,
+        "interval": 3
+    },
+    "memory": {
+        "format": "{}% ",
+        "tooltip": false,
+        "interval": 3
+    },
+    "temperature": {
+        "hwmon-path-abs": "/sys/devices/platform/legion/hwmon",
+        "input-filename": "temp1_input",
+        "critical-threshold": 80,
+        "interval": 3,
+        "format": "{temperatureC}°C {icon}",
+        "tooltip-format": "CPU 温度：{temperatureC}°C",
+        "format-icons": [
+            "",
+            "",
+            ""
+        ]
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% 󰂄",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{timeToEmpty} {icon}",
+        "interval": 5,
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+    "tray": {
+        "spacing": 8
+    }
+}

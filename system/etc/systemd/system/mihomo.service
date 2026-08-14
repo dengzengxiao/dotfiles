@@ -1,0 +1,17 @@
+[Unit]
+Description=Mihomo Proxy Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/mihomo -d /etc/mihomo -f /etc/mihomo/config.yaml
+ExecStartPost=/usr/bin/ip rule add priority 8990 from 172.18.0.0/16 table main
+ExecStartPost=-/usr/bin/sh -c 'for i in $(seq 1 30); do /usr/bin/nft list chain inet mihomo prerouting >/dev/null 2>&1 && /usr/bin/nft insert rule inet mihomo prerouting ip saddr 172.18.0.0/16 counter return && exit 0; /usr/bin/sleep 0.1; done; exit 1'
+ExecStopPost=-/usr/bin/ip rule del priority 8990 from 172.18.0.0/16 table main
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=1048576
+
+[Install]
+WantedBy=multi-user.target

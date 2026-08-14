@@ -1,0 +1,284 @@
+#!/usr/bin/env python3
+
+"""Select Mihomo proxy entries and build its runtime configuration."""
+
+from __future__ import annotations
+
+import argparse
+import copy
+import json
+import os
+import subprocess
+import sys
+import tempfile
+import urllib.error
+import urllib.parse
+import urllib.request
+from pathlib import Path
+from typing import Any
+
+import yaml
+
+
+CONFIG_DIR = Path("/etc/mihomo")
+LOCAL_CONFIG = CONFIG_DIR / "local.yaml"
+RUNTIME_CONFIG = CONFIG_DIR / "config.yaml"
+SERVICE_NAME = "mihomo"
+SERVICE_OVERRIDE = Path("/etc/systemd/system/mihomo.service.d/config-path.conf")
+MIHOMO_BIN = Path("/usr/bin/mihomo")
+DEFAULT_CONTROLLER = "http://127.0.0.1:9090"
+
+
+def die(message: str) -> None:
+    print(f"mihomo-utils: {message}", file=sys.stderr)
+    raise SystemExit(1)
+
+
+def controller_url(value: str | None = None) -> str:
+    return (value or os.environ.get("MIHOMO_CONTROLLER") or DEFAULT_CONTROLLER).rstrip("/")
+
+
+def api_request(
+    controller: str,
+    method: str,
+    path: str,
+    payload: dict[str, Any] | None = None,
+) -> dict[str, Any] | None:
+    data = json.dumps(payload, ensure_ascii=False).encode() if payload is not None else None
+    headers = {"Accept": "application/json"}
+    secret = os.environ.get("MIHOMO_SECRET")
+    if secret:
+        headers["Authorization"] = f"Bearer {secret}"
+    if data is not None:
+        headers["Content-Type"] = "application/json"
+
+    request = urllib.request.Request(
+        f"{controller}{path}", data=data, headers=headers, method=method
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=8) as response:
+            body = response.read()
+    except urllib.error.HTTPError as error:
+        if error.code == 401:
+            die("controller authentication failed; set MIHOMO_SECRET")
+        die(f"controller returned HTTP {error.code}")
+    except urllib.error.URLError as error:
+        die(f"cannot reach controller at {controller}: {error.reason}")
+
+    return json.loads(body) if body else None
+
+
+def proxy_path(group: str) -> str:
+    return "/proxies/" + urllib.parse.quote(group, safe="")
+
+
+def proxy_groups(controller: str) -> dict[str, Any]:
+    response = api_request(controller, "GET", "/proxies")
+    if not isinstance(response, dict) or not isinstance(response.get("proxies"), dict):
+        die("controller returned an invalid proxy list")
+    return response["proxies"]
+
+
+def selector_groups(controller: str) -> list[str]:
+    return [
+        name
+        for name, details in proxy_groups(controller).items()
+        if isinstance(details, dict) and details.get("type") == "Selector"
+    ]
+
+
+def group_details(controller: str, group: str) -> dict[str, Any]:
+    response = api_request(controller, "GET", proxy_path(group))
+    if not isinstance(response, dict) or not isinstance(response.get("all"), list):
+        die(f"{group!r} is not a selectable proxy group")
+    return response
+
+
+def choose_one(title: str, choices: list[str]) -> str:
+    if not choices:
+        die("no selectable entries")
+    if not sys.stdin.isatty():
+        die("interactive selection requires a terminal")
+
+    print(title, file=sys.stderr)
+    for index, choice in enumerate(choices, start=1):
+        print(f"  {index}) {choice}", file=sys.stderr)
+
+    while True:
+        try:
+            selected = input(f"Select [1-{len(choices)}]: ")
+        except EOFError:
+            raise SystemExit(1) from None
+        if selected.isdigit() and 1 <= int(selected) <= len(choices):
+            return choices[int(selected) - 1]
+        print("Invalid selection.", file=sys.stderr)
+
+
+def select_command(arguments: list[str]) -> None:
+    parser = argparse.ArgumentParser(
+        prog="mihomo-utils select",
+        description="Select an entry in a Mihomo Selector group.",
+    )
+    parser.add_argument("-g", "--group", help="Selector group name")
+    parser.add_argument("-n", "--node", help="Entry to select")
+    parser.add_argument("-l", "--list", action="store_true", help="List Selector groups and current entries")
+    parser.add_argument("-c", "--controller", help="Mihomo controller URL")
+    options = parser.parse_args(arguments)
+    controller = controller_url(options.controller)
+
+    if options.list:
+        for group in selector_groups(controller):
+            current = group_details(controller, group).get("now", "")
+            print(f"{group}\t{current}")
+        return
+
+    group = options.group or choose_one("Selector groups:", selector_groups(controller))
+    details = group_details(controller, group)
+    entries = details["all"]
+    if not all(isinstance(entry, str) for entry in entries):
+        die(f"{group!r} has an invalid entry list")
+
+    node = options.node
+    if node is None:
+        print(f"Current: {details.get('now', '')}", file=sys.stderr)
+        node = choose_one(f"Entries for {group}:", entries)
+    elif node not in entries:
+        die(f"node is not available in group {group!r}: {node}")
+
+    api_request(controller, "PUT", proxy_path(group), {"name": node})
+    selected = group_details(controller, group).get("now")
+    if selected != node:
+        die(f"selection was not applied; current entry is: {selected}")
+    print(f"Selected {group} -> {node}")
+
+
+def load_mapping(path: Path, label: str) -> dict[str, Any]:
+    try:
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        die(f"{label} does not exist: {path}")
+    except (OSError, yaml.YAMLError) as error:
+        die(f"cannot read {label} {path}: {error}")
+    if not isinstance(data, dict):
+        die(f"{label} must be a top-level YAML mapping: {path}")
+    return data
+
+
+def deep_merge(upstream: dict[str, Any], local: dict[str, Any]) -> dict[str, Any]:
+    """Merge mappings recursively; local lists and scalar values replace upstream values."""
+
+    merged = copy.deepcopy(upstream)
+    for key, local_value in local.items():
+        upstream_value = merged.get(key)
+        if isinstance(upstream_value, dict) and isinstance(local_value, dict):
+            merged[key] = deep_merge(upstream_value, local_value)
+        else:
+            merged[key] = copy.deepcopy(local_value)
+    return merged
+
+
+def validate_config(path: Path) -> None:
+    result = subprocess.run(
+        [str(MIHOMO_BIN), "-d", str(CONFIG_DIR), "-f", str(path), "-t"],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+    )
+    if result.returncode:
+        die(f"merged configuration is invalid:\n{result.stdout.strip() or 'no validation output'}")
+
+
+def write_service_override() -> None:
+    SERVICE_OVERRIDE.parent.mkdir(mode=0o755, parents=True, exist_ok=True)
+    content = (
+        "[Service]\n"
+        "ExecStart=\n"
+        f"ExecStart={MIHOMO_BIN} -d {CONFIG_DIR} -f {RUNTIME_CONFIG}\n"
+    )
+    temporary = SERVICE_OVERRIDE.with_suffix(".tmp")
+    temporary.write_text(content, encoding="ascii")
+    temporary.chmod(0o644)
+    temporary.replace(SERVICE_OVERRIDE)
+
+
+def update_command(arguments: list[str]) -> None:
+    parser = argparse.ArgumentParser(
+        prog="mihomo-utils update",
+        description="Merge a supplier configuration with /etc/mihomo/local.yaml.",
+    )
+    parser.add_argument("upstream", help="Path to the supplier YAML configuration")
+    parser.add_argument("--dry-run", action="store_true", help="Validate without writing or restarting")
+    parser.add_argument("--no-restart", action="store_true", help="Write configuration without restarting Mihomo")
+    options = parser.parse_args(arguments)
+
+    if os.geteuid() != 0:
+        die("update writes /etc/mihomo; run: sudo mihomo-utils update <upstream.yaml>")
+    if not MIHOMO_BIN.is_file():
+        die(f"Mihomo binary not found: {MIHOMO_BIN}")
+
+    upstream_path = Path(options.upstream).expanduser().resolve()
+    if not upstream_path.is_file():
+        die(f"upstream is not a regular file: {upstream_path}")
+
+    merged = deep_merge(
+        load_mapping(upstream_path, "upstream configuration"),
+        load_mapping(LOCAL_CONFIG, "local overlay"),
+    )
+    with tempfile.NamedTemporaryFile(
+        mode="w", encoding="utf-8", prefix=".mihomo-utils-", suffix=".yaml", dir=CONFIG_DIR, delete=False
+    ) as temporary:
+        candidate = Path(temporary.name)
+        yaml.safe_dump(merged, temporary, allow_unicode=True, sort_keys=False)
+
+    try:
+        candidate.chmod(0o600)
+        validate_config(candidate)
+        if options.dry_run:
+            print("Merged configuration is valid.")
+            return
+
+        candidate.replace(RUNTIME_CONFIG)
+        write_service_override()
+        subprocess.run(["systemctl", "daemon-reload"], check=True)
+        if not options.no_restart:
+            subprocess.run(["systemctl", "restart", SERVICE_NAME], check=True)
+        print(f"Updated {RUNTIME_CONFIG} from {upstream_path}")
+        if options.no_restart:
+            print("Mihomo was not restarted.")
+    except subprocess.CalledProcessError as error:
+        die(f"system command failed: {' '.join(error.cmd)}")
+    finally:
+        candidate.unlink(missing_ok=True)
+
+
+def print_help() -> None:
+    print(
+        """Usage:
+  mihomo-utils select [--list] [--group GROUP] [--node NODE]
+  mihomo-utils --list
+  mihomo-utils update UPSTREAM.yaml [--dry-run] [--no-restart]
+
+Commands:
+  select  Interactively choose an entry in a Selector group. This is the default.
+  update  Merge an upstream YAML file with /etc/mihomo/local.yaml.
+
+Environment:
+  MIHOMO_CONTROLLER  Controller URL (default: http://127.0.0.1:9090)
+  MIHOMO_SECRET      Controller secret, if configured in Mihomo
+"""
+    )
+
+
+def main(arguments: list[str]) -> None:
+    if arguments == ["--help"] or arguments == ["-h"]:
+        print_help()
+    elif arguments and arguments[0] == "update":
+        update_command(arguments[1:])
+    elif arguments and arguments[0] == "select":
+        select_command(arguments[1:])
+    else:
+        select_command(arguments)
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])

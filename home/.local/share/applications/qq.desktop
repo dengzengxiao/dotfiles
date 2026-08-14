@@ -1,0 +1,16 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=QQ
+Name[zh_CN]=QQ
+Comment=Tencent QQ
+Comment[zh_CN]=腾讯 QQ
+Exec=/usr/bin/env GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx XMODIFIERS=@im=fcitx SDL_IM_MODULE=fcitx /home/dengzengxiao/.local/bin/QQ_3.2.31_260710_x86_64_01.AppImage --ozone-platform=x11 %U
+Icon=/home/dengzengxiao/.local/share/applications/qq.png
+Terminal=false
+Categories=Network;InstantMessaging;Chat;
+MimeType=x-scheme-handler/mqqapi;
+StartupNotify=true
+StartupWMClass=QQ
+Keywords=QQ;Tencent;Chat;IM;
+Keywords[zh_CN]=QQ;腾讯;聊天;即时通讯;

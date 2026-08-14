@@ -1,0 +1,15 @@
+ipv6: true
+dns:
+  ipv6: true
+  enhanced-mode: redir-host
+tun:
+  enable: true
+  stack: mixed
+  device: mihomo
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  strict-route: true
+  dns-hijack:
+    - any:53
+    - tcp://any:53

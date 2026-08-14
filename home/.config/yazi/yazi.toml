@@ -1,0 +1,13 @@
+[mgr]
+linemode = "mtime"
+
+[flavor]
+dark = "everforest-medium"
+
+[input]
+cursor_blink = true
+
+[opener]
+edit = [
+  { run = 'nvim "$@"', block = true, for = "unix" },
+]

@@ -1,0 +1,95 @@
+* {
+    font-family: "LXGW WenKai Screen", "JetBrainsMono Nerd Font", "Symbols Nerd Font";
+    font-size: 14px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: #2D353B;
+    color: #D3C6AA;
+    border-bottom: 0px solid #3b4252;
+}
+
+button {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+button:hover {
+    background: #3D484D;
+    box-shadow: inset 0 -2px #A7C080;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    color: #7A8478;
+    background: transparent;
+}
+
+#workspaces button.focused,
+#workspaces button.active {
+    color: #D3C6AA;
+    background: #3D484D;
+    box-shadow: inset 0 -2px #A7C080;
+}
+
+#workspaces button.urgent {
+    color: #3D484D;
+    background: #E67E80;
+}
+
+#window {
+    margin: 0 10px;
+    color: #D3C6AA;
+}
+
+#clock,
+#pulseaudio,
+#network,
+#bluetooth,
+#cpu,
+#memory,
+#temperature,
+#battery,
+#tray {
+    padding: 0 9px;
+}
+
+#clock {
+    color: #D3C6AA;
+}
+
+#pulseaudio { color: #7FBBB3; }
+#network { color: #A7C080; }
+#bluetooth { color: #7FBBB3; }
+#cpu { color: #DBBC7F; }
+#memory { color: #D699B6; }
+#temperature { color: #E69875; }
+#tray { padding-right: 11px; }
+
+#network.disconnected,
+#bluetooth.disabled,
+#bluetooth.off,
+#battery.warning,
+#temperature.critical {
+    color: #E67E80;
+}
+
+#pulseaudio.muted {
+    color: #7A8478;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: #A7C080;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}

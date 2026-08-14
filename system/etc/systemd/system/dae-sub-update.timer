@@ -1,0 +1,14 @@
+[Unit]
+Description=Timer to update dae subscriptions periodically
+Requires=dae-sub-update.service
+
+[Timer]
+# 系统启动10分钟后执行第一次
+OnBootSec=10min
+# 每隔12小时执行一次
+OnUnitActiveSec=12h
+# 如果错过了计划时间，开机后1分钟内立即补上
+Persistent=false
+
+[Install]
+WantedBy=timers.target

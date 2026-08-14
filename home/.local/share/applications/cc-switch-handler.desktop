@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=CC Switch
+Exec="/usr/bin/cc-switch" %u
+Terminal=false
+MimeType=x-scheme-handler/ccswitch
+NoDisplay=true

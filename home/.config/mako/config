@@ -1,0 +1,12 @@
+# Binding options
+default-timeout=5000
+
+# Style settings
+font=LXGW WenKai Screen 14
+background-color=#2E383C
+text-color=#D3C6AA
+width=500
+height=300
+border-size=1
+border-color=#4F5B58
+border-radius=9

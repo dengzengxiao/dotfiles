@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=baidunetdisk
+Name[zh_CN]=百度网盘
+Exec=env GTK_IM_MODULE=fcitx XMODIFIERS=@im=fcitx /usr/lib/baidunetdisk/baidunetdisk --no-sandbox %U
+Terminal=false
+Type=Application
+Icon=baidunetdisk
+StartupWMClass=baidunetdisk
+Comment=百度网盘
+MimeType=x-scheme-handler/baiduyunguanjia;
+Categories=Network;

@@ -1,0 +1,40 @@
+command = /bin/zsh
+
+# General settings
+confirm-close-surface = false
+
+# Theme
+font-family = Maple Mono NF CN
+font-size = 12
+theme = everforest-dark-medium
+background-opacity = 0.63
+# background-blur = true
+
+# Clipboard
+clipboard-read = allow
+clipboard-write = allow
+clipboard-paste-protection = true
+
+# Cursor
+cursor-style-blink = true
+adjust-cursor-thickness = 3
+mouse-hide-while-typing = true
+
+# Keybinds
+keybind = performable:ctrl+shift+alt+h=resize_split:left,10
+keybind = performable:ctrl+shift+alt+j=resize_split:down,10
+keybind = performable:ctrl+shift+alt+k=resize_split:up,10
+keybind = performable:ctrl+shift+alt+l=resize_split:right,10
+
+keybind = performable:ctrl+shift+h=new_split:left
+keybind = performable:ctrl+shift+j=new_split:down
+keybind = performable:ctrl+shift+k=new_split:up
+keybind = performable:ctrl+shift+l=new_split:right
+
+keybind = performable:ctrl+h=goto_split:left
+keybind = performable:ctrl+j=goto_split:down
+keybind = performable:ctrl+k=goto_split:up
+keybind = performable:ctrl+l=goto_split:right
+
+# custom-shader = "~/.config/ghostty/shaders/debug_cursor_animated.glsl"
+# custom-shader-animation = true

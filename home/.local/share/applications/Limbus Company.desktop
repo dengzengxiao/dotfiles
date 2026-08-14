@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Limbus Company
+Comment=Play this game on Steam
+Exec=steam steam://rungameid/1973530
+Icon=steam_icon_1973530
+Terminal=false
+Type=Application
+Categories=Game;

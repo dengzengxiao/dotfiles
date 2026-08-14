@@ -1,0 +1,11 @@
+#!/bin/sh
+
+exec env SWAY_UNSUPPORTED_GPU=true \
+    LIBVA_DRIVER_NAME=nvidia \
+    NVD_BACKEND=direct \
+    GBM_BACKEND=nvidia-drm \
+    __GLX_VENDOR_LIBRARY_NAME=nvidia \
+    MOZ_ENABLE_WAYLAND=1 \
+    MOZ_IGNORE_GFX_BLOCKLIST=1 \
+    QT_QPA_PLATFORMTHEME=qt6ct \
+    sway

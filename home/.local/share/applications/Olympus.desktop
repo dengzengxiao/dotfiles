@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Olympus
+Comment=Celeste Mod Manager
+Exec="/home/dengzengxiao/.local/src/olympus/olympus" %u
+Icon=/home/dengzengxiao/.local/src/olympus/olympus.png
+Terminal=false
+Categories=Game;Application;
+MimeType=x-scheme-handler/everest

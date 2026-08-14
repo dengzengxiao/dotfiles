@@ -1,0 +1,6 @@
+[filechooser]
+cmd=$HOME/.config/yazi/yazi-wrapper.sh
+default-dir='$HOME'
+env=TERMCMD='ghostty --title="File Chooser" -e'
+open_mode=suggested
+save_mode=suggested

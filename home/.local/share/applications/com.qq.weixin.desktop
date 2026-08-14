@@ -1,0 +1,23 @@
+[Desktop Entry]
+Name=WeChat
+Comment=Tencent instant messaging client
+Exec=env PORTABLE_CONF=/home/dengzengxiao/.config/portable/info/com.qq.weixin/config.toml /usr/bin/portable -- %u
+Icon=wechat
+Type=Application
+Categories=Network;InstantMessaging;
+Keywords=wechat;weixin;we;w;
+StartupWMClass=wechat
+MimeType=x-scheme-handler/wechat;
+Actions=opendir;share-files;quit;
+
+[Desktop Action opendir]
+Name=Open WeChat Home
+Exec=env PORTABLE_CONF=/home/dengzengxiao/.config/portable/info/com.qq.weixin/config.toml /usr/bin/portable --actions opendir
+
+[Desktop Action share-files]
+Name=Share files with WeChat
+Exec=env PORTABLE_CONF=/home/dengzengxiao/.config/portable/info/com.qq.weixin/config.toml /usr/bin/portable --actions share-files
+
+[Desktop Action quit]
+Name=Quit WeChat
+Exec=env PORTABLE_CONF=/home/dengzengxiao/.config/portable/info/com.qq.weixin/config.toml /usr/bin/portable --actions quit

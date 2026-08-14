@@ -1,0 +1,9 @@
+[options]
+# 适应图片大小
+scaling_mode = shrink
+suppress_default_binds = false
+# overlay 字体
+overlay_font = Maple Mono NF CN:16
+# 窗口标题栏格式
+title_text = imv - [${imv_current_index}/${imv_total_images}] ${imv_current_file}
+

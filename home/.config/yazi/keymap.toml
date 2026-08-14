@@ -1,0 +1,5 @@
+[[mgr.append_keymap]]
+on   = [ "g", "s" ]
+run  = "cd /home/dengzengxiao/.local/share/WeChat_Data/Shared"
+desc = "Jump to Wechat shared dirctory"
+

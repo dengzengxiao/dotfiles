@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=GPU Screen Recorder
+GenericName=Screen recorder
+Comment=A ShadowPlay-like screen recorder for Linux
+Icon=gpu-screen-recorder
+Exec=gsr-ui launch-daemon
+Terminal=false
+Hidden=false

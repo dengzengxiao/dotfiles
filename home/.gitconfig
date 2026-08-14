@@ -3,8 +3,6 @@
 	version = HTTP/1.1
 [curl]
 	ipresolve = v4
-[url "https://github.com/"]
-	insteadOf = git@github.com:
 [user]
 	email = dengzengxiao___@outlook.com
 	name = dengzengxiao

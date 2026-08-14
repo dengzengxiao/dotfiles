@@ -49,22 +49,6 @@ return {
         "folke/snacks.nvim",
         priority = 1000,
         lazy = false,
-        keys = {
-            {
-                "<leader>e",
-                function()
-                    Snacks.explorer({ cwd = vim.fn.getcwd() })
-                end,
-                desc = "Explorer Snacks (cwd)",
-            },
-            {
-                "<leader>E",
-                function()
-                    Snacks.explorer({ cwd = LazyVim.root() })
-                end,
-                desc = "Explorer Snacks (root dir)",
-            },
-        },
         opts = {
             scroll = { enabled = false },
             dashboard = {

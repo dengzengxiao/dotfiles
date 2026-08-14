@@ -336,6 +336,9 @@ spawn-at-startup "noctalia"
 // Use yazi as the file chooser
 spawn-at-startup "/usr/lib/xdg-desktop-portal-termfilechooser -r &"
 
+// Xwayland fonts
+spawn-at-startup "xrdb" "-merge" "/home/dengzengxiao/.Xresources"
+
 // Create named workspaces
 workspace "Browser"
 workspace "Chat"

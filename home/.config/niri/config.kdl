@@ -32,6 +32,9 @@ input {
             // layout "us,ru"
             // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
 
+            layout "us"
+            options "caps:escape"
+
             // If this section is empty, niri will fetch xkb settings
             // from org.freedesktop.locale1. You can control these using
             // localectl set-x11-keymap.
@@ -328,19 +331,10 @@ layout {
 spawn-at-startup "udiskie" "-t"
 
 // Starts Noctalia on startup
-spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "noctalia"
 
 // Use yazi as the file chooser
-spawn-sh-at-startup "killall xdg-desktop-portal xdg-desktop-portal-termfilechooser 2>/dev/null"
 spawn-at-startup "/usr/lib/xdg-desktop-portal-termfilechooser -r &"
-
-// Xwayland
-spawn-sh-at-startup "xrdb -merge ~/.Xresources"
-
-// Sync GTK font settings
-spawn-sh-at-startup "gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'"
-spawn-sh-at-startup "gsettings set org.gnome.desktop.interface font-hinting 'slight'"
-spawn-sh-at-startup "gsettings set org.gnome.desktop.interface font-rgba-order 'rgb'"
 
 // Create named workspaces
 workspace "Browser"
@@ -420,9 +414,9 @@ binds {
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
     // "-l 1.0" limits the volume to 100%.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "increase"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "decrease"; }
-    XF86AudioMute        allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "noctalia msg volume-up"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "noctalia msg volume-down"; }
+    XF86AudioMute        allow-when-locked=true { spawn-sh "noctalia msg volume-mute"; }
     XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
     // Example media keys mapping using playerctl.
@@ -435,8 +429,8 @@ binds {
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
     // but you need to manually put each argument in separate "" quotes.
-    XF86MonBrightnessUp allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+    XF86MonBrightnessUp   allow-when-locked=true { spawn-sh "noctalia msg brightness-up"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "noctalia msg brightness-down"; }
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
@@ -637,8 +631,8 @@ binds {
     Mod+Shift+Equal { set-window-height "+10%"; }
 
     // Move the focused window between the floating and the tiling layout.
-    Mod+V       { toggle-window-floating; }
-    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+    Mod+Space       { toggle-window-floating; }
+    Mod+Shift+Space { switch-focus-between-floating-and-tiling; }
 
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
@@ -653,7 +647,7 @@ binds {
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
-    Print { screenshot; }
+    Print { spawn-sh "sh -c ./niri-screenshot.sh"; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
 
@@ -675,13 +669,12 @@ binds {
     Mod+Shift+P { power-off-monitors; }
 
     // Noctalia bindings
-    Mod+Space { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
-    Mod+S { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
-    Mod+Shift+Comma { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
-    Mod+X { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
-    Mod+Ctrl+L { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
-    Mod+Shift+Ctrl+L { spawn-sh "qs -c noctalia-shell ipc call sessionMenu lockAndSuspend"; }
-    Ctrl+Alt+Delete { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
+    Mod+D { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Mod+S { spawn-sh "noctalia msg panel-toggle control-center"; }
+    Mod+Shift+V { spawn-sh "noctalia msg panel-toggle clipboard"; }
+    Mod+Shift+Comma { spawn-sh "noctalia msg settings-toggle"; }
+    Mod+Ctrl+L { spawn-sh "noctalia msg session lock"; }
+    Mod+Ctrl+Shift+L { spawn-sh "noctalia msg session lock-and-suspend"; }
 
     // Screenshot
     Mod+Shift+S { spawn-sh "sh -c /home/dengzengxiao/.config/niri/niri-screenshot.sh"; }
@@ -699,19 +692,17 @@ blur {
     saturation 1.0
 }
 
-layer-rule {
-    match namespace="^noctalia-overview*"
-
-    place-within-backdrop true
+// Floating Noctalia settings window.
+window-rule {
+    match app-id="dev.noctalia.Noctalia"
+    open-floating true
+    default-column-width { fixed 1080; }
+    default-window-height { fixed 920; }
 }
 
 layer-rule {
-    match namespace="^noctalia-(background|launcher-overlay|dock)-.*$"
-
-    background-effect {
-        blur true
-        xray false
-    }
+    match namespace="^noctalia-backdrop"
+    place-within-backdrop true
 }
 
 window-rule {
@@ -754,6 +745,8 @@ window-rule {
 
 window-rule {
     match app-id=r#"^steam_app_\d+$"#
+    match app-id="Celeste"
+    match app-id="Stardew Valley"
 
     open-fullscreen true
     open-on-workspace "Game"

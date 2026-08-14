@@ -4,9 +4,9 @@ set -euo pipefail
 repo_dir="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 
 while IFS= read -r -d '' source_file; do
-  target="${source_file#"$repo_dir/system"}"
-  mode="$(stat -c '%a' "$source_file")"
-  sudo install -D -m "$mode" "$source_file" "$target"
+    target="${source_file#"$repo_dir/system"}"
+    mode="$(stat -c '%a' "$source_file")"
+    sudo install -D -m "$mode" "$source_file" "$target"
 done < <(find "$repo_dir/system/etc" -type f -print0)
 
 sudo systemctl daemon-reload

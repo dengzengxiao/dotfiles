@@ -338,6 +338,7 @@ spawn-at-startup "/usr/lib/xdg-desktop-portal-termfilechooser -r &"
 
 // Xwayland fonts
 spawn-at-startup "xrdb" "-merge" "/home/dengzengxiao/.Xresources"
+spawn-sh-at-startup "command -v xsettingsd >/dev/null 2>&1 && exec xsettingsd"
 
 // Create named workspaces
 workspace "Browser"

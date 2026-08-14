@@ -682,6 +682,20 @@ binds {
 
     // Screenshot
     Mod+Shift+S { spawn-sh "sh -c /home/dengzengxiao/.config/niri/niri-screenshot.sh"; }
+
+    // Change monitors
+    Mod+P {
+        spawn-sh "current=$(niri msg -j focused-output | jq -r '.name');
+        if [ \"$current\" = eDP-1 ]; then
+            niri msg output eDP-1 off &&
+            niri msg output HDMI-A-1 on &&
+            niri msg action focus-monitor HDMI-A-1;
+        else
+            niri msg output HDMI-A-1 off &&
+            niri msg output eDP-1 on &&
+            niri msg action focus-monitor eDP-1;
+        fi"
+    }
 }
 
 debug {

@@ -1,0 +1,5 @@
+# Generated Rime state. The xhup YAML dictionaries are intentionally tracked.
+home/.local/share/fcitx5/rime/build/
+home/.local/share/fcitx5/rime/sync/
+home/.local/share/fcitx5/rime/installation.yaml
+home/.local/share/fcitx5/rime/**/*.userdb/

@@ -1,0 +1,2 @@
+# Keep the default bindings; make Left/Right adjust MPD volume by 1%.
+volume_change_step = 1

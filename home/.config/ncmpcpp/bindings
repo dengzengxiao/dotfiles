@@ -1,0 +1,117 @@
+# Vim-style ncmpcpp controls. Restart ncmpcpp after changing this file.
+
+# Move through lists and long views.
+def_key "j"
+  scroll_down
+
+def_key "k"
+  scroll_up
+
+def_key "ctrl-d"
+  page_down
+
+def_key "ctrl-u"
+  page_up
+
+def_key "g"
+  move_home
+
+def_key "G"
+  move_end
+
+# Move out of a directory or pane, then into the selected item or pane.
+def_key "h"
+  jump_to_parent_directory
+
+def_key "h"
+  previous_column
+
+def_key "h"
+  master_screen
+
+def_key "l"
+  enter_directory
+
+def_key "l"
+  play_item
+
+def_key "l"
+  next_column
+
+def_key "l"
+  slave_screen
+
+# Playback and queue management.
+def_key "space"
+  pause
+
+def_key "H"
+  previous
+
+def_key "L"
+  next
+
+def_key "["
+  seek_backward
+
+def_key "]"
+  seek_forward
+
+def_key "a"
+  add_selected_items
+
+def_key "d"
+  delete_playlist_items
+
+def_key "d"
+  delete_browser_items
+
+def_key "d"
+  delete_stored_playlist
+
+def_key "J"
+  move_selected_items_down
+
+def_key "K"
+  move_selected_items_up
+
+# Screens and search.
+def_key "1"
+  show_playlist
+
+def_key "2"
+  show_browser
+
+def_key "3"
+  show_search_engine
+
+def_key "4"
+  show_media_library
+
+def_key "5"
+  show_playlist_editor
+
+def_key "s"
+  show_search_engine
+
+def_key "/"
+  find
+
+def_key "n"
+  next_found_item
+
+def_key "N"
+  previous_found_item
+
+# Player modes and quit.
+def_key "r"
+  toggle_repeat
+
+def_key "z"
+  toggle_random
+
+def_key "x"
+  stop
+
+def_key "q"
+  quit

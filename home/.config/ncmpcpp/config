@@ -7,8 +7,7 @@ visualizer_output_name = Visualizer feed
 visualizer_in_stereo = yes
 visualizer_autoscale = yes
 
-visualizer_type = ellipse
+visualizer_type = spectrum
 visualizer_fps = 60
-visualizer_look = ▁▂▃▄▅▆▇█
-visualizer_spectrum_smooth_look = no
+visualizer_spectrum_smooth_look = yes
 visualizer_color = default

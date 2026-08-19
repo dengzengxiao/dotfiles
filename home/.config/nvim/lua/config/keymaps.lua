@@ -33,7 +33,7 @@ vim.keymap.set("n", "<leader>hp", function() require("gitsigns").preview_hunk() 
 vim.keymap.set("n", "<leader>hb", function() require("gitsigns").blame_line() end, { desc = "Blame Line" })
 
 vim.keymap.set("n", "<leader>cp", "<Cmd>MarkdownPreviewToggle<CR>", { desc = "Markdown Preview" })
-vim.keymap.set("i", "<kOrigin>", "<Esc>", opts)
+vim.keymap.set("n", "<Esc>", "<Cmd>:nohl<CR>", opts)
 
 -- Lazy panel
 vim.keymap.set("n", "<leader>l", "<Cmd>Lazy<CR>", { desc = "lazy.nvim panel" })

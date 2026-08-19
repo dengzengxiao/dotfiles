@@ -14,7 +14,7 @@ return {
 		maximum_time = 1000,
 		testcases_directory = "./testcases",
 		companion_port = 12345,
-		template_file = "../templates/NewFile.cpp",
+		template_file = "~/data/LearnOI/templates/NewFile.cpp",
 		received_problems_prompt_path = false,
 		received_contests_prompt_directory = false,
 		received_contests_prompt_extension = false,

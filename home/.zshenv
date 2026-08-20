@@ -1,4 +1,4 @@
-export PATH="$HOME/.npm-global/bin:$PATH:$HOME/.cargo/bin"
+export PATH="$HOME/.npm-global/bin:$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
 export LANG=zh_CN.UTF-8
 
 export TERMCMD='ghostty --title="File Chooser" -e'

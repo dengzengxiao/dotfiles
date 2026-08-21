@@ -7,7 +7,7 @@ return {
 		compile_command = {
 			cpp = {
 				exec = "g++",
-				args = { "-std=c++23", "-static", "-Ofast", "-Wall", "$(FNAME)", "-o", "./executables/$(FNOEXT)" },
+				args = { "-std=c++14", "-static", "-O2", "-Wall", "-DLOCAL", "$(FNAME)", "-o", "./executables/$(FNOEXT)" },
 			},
 		},
 		run_command = { cpp = { exec = "./executables/$(FNOEXT)" } },

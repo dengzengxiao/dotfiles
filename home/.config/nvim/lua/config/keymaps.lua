@@ -25,6 +25,13 @@ vim.keymap.set("n", "<F11>", "<Cmd>CompetiTest run<CR>", opts)
 vim.keymap.set("i", "<F11>", "<Cmd>CompetiTest run<CR>", opts)
 vim.keymap.set("n", "<leader>cx", "<Cmd>CompetiTest receive problem<CR>", opts)
 
+-- OI
+vim.keymap.set("n", "<F2>", "<Cmd>vnew %:r.log<CR><Cmd>w<CR><Cmd>wincmd 50<<CR><Cmd>new %:r.out<CR><Cmd>w<CR><Cmd>new %:r.in<CR><Cmd>w<CR><Cmd>wincmd h<CR>", { desc = "create problem" })
+vim.keymap.set("n", "<F3>", "<Cmd>!g++ %:r.cpp -std=c++23 -O2 -Wall -DLOCAL -static -Wfatal-errors -o %:r", { desc = "Compile problem" })
+vim.keymap.set("n", "<F4>", "<Cmd>!g++ %:r.cpp -std=c++23 -O2 -Wall -DLOCAL -Wfatal-errors -fsanitize=address -o %:r", { desc = "Compile problem" })
+vim.keymap.set("n", "<F5>", "<Cmd>!time ./%:r 2> %:r.log", desc = { desc = "Run without file I/O" })
+vim.keymap.set("n", "<F6>", "<Cmd>!time ./%:r < %:r.in > %:r.out 2> %:r.log", desc = { desc = "Run with file I/O" })
+
 -- Todo comments and Git hunks
 vim.keymap.set("n", "<leader>st", function() Snacks.picker.todo_comments() end, { desc = "Todo Comments" })
 vim.keymap.set("n", "]h", function() require("gitsigns").nav_hunk("next") end, { desc = "Next Hunk" })

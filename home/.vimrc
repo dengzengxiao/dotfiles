@@ -13,7 +13,7 @@ inoremap { {}<left>
 inoremap ' ''<left>
 inoremap " ""<left>
 
-map <F5> :vnew %:r.log<CR>:wincmd L<CR>:63wincmd <<CR>:w<CR>:new %:r.out<CR>:w<CR>:new %:r.in<CR>:w<CR>:wincmd h<CR>
+map <F5> :vnew %:r.log<CR>:wincmd L<CR>:50wincmd <<CR>:w<CR>:new %:r.out<CR>:w<CR>:new %:r.in<CR>:w<CR>:wincmd h<CR>
 map <F9> :!clear<CR>:!g++ -std=c++20 -O2 -Wall -Wextra -Wshadow -Wfatal-errors -static -DLOCAL %:r.cpp -o %:r
 map <F10> :!time ./%:r 2> %:r.log
 map <F11> :!time ./%:r < %:r.in > %:r.out 2> %:r.log

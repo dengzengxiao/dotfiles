@@ -765,6 +765,8 @@ window-rule {
     match app-id=r#"^steam_app_\d+$"#
     match app-id="Celeste"
     match app-id="Stardew Valley"
+    match app-id="org.jackhuang.hmcl.Launcher"
+    match app-id="Minecraft* 1.21.8"
 
     open-fullscreen true
     open-on-workspace "Game"

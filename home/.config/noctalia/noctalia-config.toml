@@ -1,0 +1,160 @@
+[backdrop]
+blur_intensity = 0.5
+enabled = true
+tint_intensity = 0.29999999999999999
+
+[bar.default]
+end = [ "notifications", "network", "bluetooth", "volume", "brightness", "battery", "tray", "session" ]
+radius = 9
+start = [ "control-center", "wallpaper", "workspaces", "cpu", "ram", "temp" ]
+widget_spacing = 9
+
+[battery]
+warning_threshold = 20
+
+[control_center.calendar]
+show_events_card = false
+
+[desktop_widgets]
+enabled = true
+schema_version = 2
+widget_order = []
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget]
+
+[location]
+address = "Shanghai, China"
+
+[lockscreen]
+blur_intensity = 0.0
+tint_intensity = 0.0
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-login-box@HDMI-A-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 1706.666748046875
+    cy = 1440.0
+    output = "HDMI-A-1"
+    placement_height = 1440.0
+    placement_width = 2560.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 854.0
+    cy = 885.00006103515625
+    output = "eDP-1"
+    placement_height = 1067.0
+    placement_width = 1707.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[nightlight]
+temperature_night = 5000
+
+[notification]
+history_retention_hours = 12
+
+[osd.kinds]
+media = false
+
+[shell]
+avatar_path = "/home/dengzengxiao/Pictures/DeepSleep.png"
+font_family = "LXGW WenKai Screen"
+panel_anchor_bar = "default"
+polkit_agent = true
+screen_time_enabled = true
+
+    [shell.screenshot]
+    directory = "/home/dengzengxiao/Pictures/Screenshots"
+    show_cursor = true
+
+    [shell.shadow]
+    direction = "down_right"
+
+[theme]
+builtin = "Gruvbox"
+community_palette = "Everforest"
+mode = "dark"
+source = "community"
+wallpaper_scheme = "m3-content"
+
+[wallpaper.default]
+path = "/home/dengzengxiao/Pictures/Wallpapers/astroforest.png"
+
+[wallpaper.last]
+path = "/home/dengzengxiao/Pictures/Wallpapers/astroforest.png"
+
+[wallpaper.monitors.HDMI-A-1]
+path = "/home/dengzengxiao/Pictures/Wallpapers/astroforest.png"
+
+[wallpaper.monitors.eDP-1]
+path = "/home/dengzengxiao/Pictures/Wallpapers/astroforest.png"
+
+[widget.clock]
+anchor = true
+format = "{:%Y-%m-%d %H:%M:%S}"
+
+[widget.cpu]
+show_value = false
+
+[widget.network]
+show_label = false
+
+[widget.ram]
+show_value = false
+
+[widget.temp]
+show_value = false
+
+[widget.workspaces]
+show_labels = false

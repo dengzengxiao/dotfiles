@@ -1,5 +1,7 @@
 # dotfiles
 
+[zh_cn](./README.zh_cn.md)
+
 ## User Configuration (GNU Stow)
 
 `home/` is the only Stow package; its directory structure maps directly to `$HOME`. Run:

@@ -35,9 +35,6 @@ cd "$HOME/dotfiles"
 ./scripts/link-home
 ```
 
-rime-crane 所需的 schema、码表、Lua 脚本和 OpenCC 规则已位于 `home/.local/share/fcitx5/rime/`。
-在安装 `fcitx5-rime` 与 `librime-lua` 后，运行上述命令并重启 Fcitx5 即可。
-
 ## 系统配置
 
 `system/etc/` 是选定系统配置的快照，会复制为普通文件而非符号链接。检查内容后运行：

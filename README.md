@@ -37,9 +37,6 @@ cd "$HOME/dotfiles"
 ./scripts/link-home
 ```
 
-The schemas, tables, Lua scripts, and OpenCC rules required by rime-crane are already in `home/.local/share/fcitx5/rime/`.
-After installing `fcitx5-rime` and `librime-lua`, run the command above and restart Fcitx5.
-
 ## System Configuration
 
 `system/etc/` is a snapshot of selected system configuration. Its contents are copied as regular files rather than symlinked. Review them, then run:

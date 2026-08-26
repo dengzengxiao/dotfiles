@@ -751,6 +751,7 @@ window-rule {
 
 window-rule {
     match app-id="wechat"
+    match app-id="QQ"
 
     open-on-workspace "Chat"
 }

@@ -132,7 +132,7 @@ output "eDP-1" {
 
 output "HDMI-A-1" {
     // Uncomment this line to disable this output.
-    off
+    // off
 
     // Resolution and, optionally, refresh rate of the output.
     // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
@@ -684,7 +684,7 @@ binds {
     Mod+Shift+S { spawn-sh "sh -c /home/dengzengxiao/.config/niri/niri-screenshot.sh"; }
 
     // Change monitors
-    Mod+P {
+    Mod+P allow-when-locked=true {
         spawn-sh "current=$(niri msg -j focused-output | jq -r '.name');
         if [ \"$current\" = eDP-1 ]; then
             niri msg output eDP-1 off &&

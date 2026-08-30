@@ -116,7 +116,7 @@ source ${ZIM_HOME}/init.zsh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Everforest Theme
-source ~/.zsh-theme/everforest-dark.zsh
+# source ~/.zsh-theme/everforest-dark.zsh
 
 # Zoxide
 eval "$(zoxide init zsh)"

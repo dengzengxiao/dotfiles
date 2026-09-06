@@ -5,6 +5,13 @@ vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
 vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
 vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
 
+-- Pairs
+vim.keymap.set("i", "(", "()<left>", { desc = "Insert a ()" })
+vim.keymap.set("i", "[", "[]<left>", { desc = "Insert a []" })
+vim.keymap.set("i", "{", "{}<left>", { desc = "Insert a {}" })
+vim.keymap.set("i", "\'", "\'\'<left>", { desc = "Insert a \'\'" })
+vim.keymap.set("i", "\"", "\"\"<left>", { desc = "Insert a \"\"" })
+
 -- Snacks picker
 vim.keymap.set("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Find Files" })
 vim.keymap.set("n", "<leader>fr", function() Snacks.picker.recent() end, { desc = "Recent Files" })
@@ -39,7 +46,7 @@ vim.keymap.set("n", "[h", function() require("gitsigns").nav_hunk("prev") end, {
 vim.keymap.set("n", "<leader>hp", function() require("gitsigns").preview_hunk() end, { desc = "Preview Hunk" })
 vim.keymap.set("n", "<leader>hb", function() require("gitsigns").blame_line() end, { desc = "Blame Line" })
 
-vim.keymap.set("n", "<leader>cp", "<Cmd>MarkdownPreviewToggle<CR>", { desc = "Markdown Preview" })
+vim.keymap.set("n", "<leader>cp", "<Cmd>MarkdownPreview<CR>", { desc = "Markdown Preview" })
 vim.keymap.set("n", "<Esc>", "<Cmd>:nohl<CR>", opts)
 
 -- Lazy panel

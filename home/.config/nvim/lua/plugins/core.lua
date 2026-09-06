@@ -30,11 +30,6 @@ return {
         end,
     },
     {
-        "echasnovski/mini.pairs",
-        event = "InsertEnter",
-        opts = {},
-    },
-    {
         "saghen/blink.cmp",
         event = "InsertEnter",
 		dependencies = { 

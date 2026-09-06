@@ -19,5 +19,6 @@ return {
 		received_contests_prompt_directory = false,
 		received_contests_prompt_extension = false,
 		evaluate_template_modifiers = true,
+		date_format = "%Y-%m-%d %H:%M:%S",
 	}
 }

@@ -1,0 +1,35 @@
+# Local override for the packaged WeChat Portable sandbox.
+# Keep the packaged permissions and data location, and pass the Wayland input
+# method setting directly to WeChat inside the sandbox.
+[metadata]
+appID = "com.qq.weixin"
+friendlyName = "WeChat"
+stateDirectory = "WeChat_Data"
+
+[exec]
+target = "/usr/bin/env"
+arguments = ["QT_IM_MODULE=text-input-unstable-v3", "/opt/wechat/wechat"]
+
+[processes]
+track = true
+
+[system]
+inhibitSuspend = false
+uclamp = "50"
+deviceAllow = ["camera"]
+
+[network]
+enable = true
+
+[privacy]
+x11 = true
+classicNotifications = false
+lockdown = true
+
+[advanced]
+zink = false
+qt5Compat = true
+mprisName = []
+trayWake = false
+kDEStatus = true
+flatpakInfo = true

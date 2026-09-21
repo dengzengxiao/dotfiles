@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=WeChat
 Comment=Tencent instant messaging client
-Exec=env PORTABLE_CONF=/home/dengzengxiao/.config/portable/info/com.qq.weixin/config.toml /usr/bin/portable -- %u
+Exec=env PORTABLE_CONF=/home/dengzengxiao/.config/portable/info/com.qq.weixin/config.toml QT_IM_MODULE=text-input-unstable-v3 /usr/bin/portable -- %u
 Icon=wechat
 Type=Application
 Categories=Network;InstantMessaging;
@@ -12,12 +12,12 @@ Actions=opendir;share-files;quit;
 
 [Desktop Action opendir]
 Name=Open WeChat Home
-Exec=env PORTABLE_CONF=/home/dengzengxiao/.config/portable/info/com.qq.weixin/config.toml /usr/bin/portable --actions opendir
+Exec=env PORTABLE_CONF=/home/dengzengxiao/.config/portable/info/com.qq.weixin/config.toml QT_IM_MODULE=text-input-unstable-v3 /usr/bin/portable --actions opendir
 
 [Desktop Action share-files]
 Name=Share files with WeChat
-Exec=env PORTABLE_CONF=/home/dengzengxiao/.config/portable/info/com.qq.weixin/config.toml /usr/bin/portable --actions share-files
+Exec=env PORTABLE_CONF=/home/dengzengxiao/.config/portable/info/com.qq.weixin/config.toml QT_IM_MODULE=text-input-unstable-v3 /usr/bin/portable --actions share-files
 
 [Desktop Action quit]
 Name=Quit WeChat
-Exec=env PORTABLE_CONF=/home/dengzengxiao/.config/portable/info/com.qq.weixin/config.toml /usr/bin/portable --actions quit
+Exec=env PORTABLE_CONF=/home/dengzengxiao/.config/portable/info/com.qq.weixin/config.toml QT_IM_MODULE=text-input-unstable-v3 /usr/bin/portable --actions quit

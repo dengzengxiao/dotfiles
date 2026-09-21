@@ -181,7 +181,7 @@ layout {
     // - "always", the focused column will always be centered.
     // - "on-overflow", focusing a column will center it if it doesn't fit
     //   together with the previously focused column.
-    center-focused-column "on-overflow"
+    center-focused-column "never"
 
     // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
     preset-column-widths {
@@ -742,6 +742,12 @@ window-rule {
 }
 
 window-rule {
+    match app-id="chatgpt"
+
+    draw-border-with-background false
+}
+
+window-rule {
     match app-id="firefox"
 
     open-maximized true
@@ -754,6 +760,7 @@ window-rule {
     match app-id="QQ"
 
     open-on-workspace "Chat"
+    draw-border-with-background false
 }
 
 window-rule {

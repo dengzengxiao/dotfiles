@@ -6,11 +6,13 @@ tint_intensity = 0.29999999999999999
 [bar.default]
 end = [ "notifications", "network", "bluetooth", "volume", "brightness", "battery", "tray", "session" ]
 radius = 9
-start = [ "control-center", "wallpaper", "workspaces", "cpu", "ram", "temp" ]
+start = [ "control-center", "widget", "wallpaper", "workspaces", "cpu", "ram", "temp" ]
 widget_spacing = 9
 
 [battery]
 warning_threshold = 20
+
+[calendar]
 
 [control_center.calendar]
 show_events_card = false
@@ -104,8 +106,18 @@ temperature_night = 5000
 [notification]
 history_retention_hours = 12
 
-[osd.kinds]
-media = false
+[osd]
+position = "bottom_center"
+position_vertical = "center_right"
+
+    [osd.kinds]
+    media = false
+
+[plugin_settings."oldirtty/color_picker"]
+swatch-radius = 9
+
+[plugins]
+enabled = [ "oldirtty/color_picker" ]
 
 [shell]
 avatar_path = "/home/dengzengxiao/Pictures/DeepSleep.png"
@@ -122,23 +134,26 @@ screen_time_enabled = true
     direction = "down_right"
 
 [theme]
-builtin = "Gruvbox"
+builtin = "Nord"
 community_palette = "Everforest"
 mode = "dark"
 source = "community"
 wallpaper_scheme = "m3-content"
 
-[wallpaper.default]
-path = "/home/dengzengxiao/Pictures/Wallpapers/astroforest.png"
+[wallpaper]
+directory = "~/Pictures/Wallpapers"
 
-[wallpaper.last]
-path = "/home/dengzengxiao/Pictures/Wallpapers/astroforest.png"
+    [wallpaper.default]
+    path = "/home/dengzengxiao/Pictures/Wallpapers/astroforest.png"
 
-[wallpaper.monitors.HDMI-A-1]
-path = "/home/dengzengxiao/Pictures/Wallpapers/astroforest.png"
+    [wallpaper.last]
+    path = "/home/dengzengxiao/Pictures/Wallpapers/astroforest.png"
 
-[wallpaper.monitors.eDP-1]
-path = "/home/dengzengxiao/Pictures/Wallpapers/astroforest.png"
+    [wallpaper.monitors.HDMI-A-1]
+    path = "/home/dengzengxiao/Pictures/Wallpapers/astroforest.png"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/dengzengxiao/Pictures/Wallpapers/astroforest.png"
 
 [widget.clock]
 anchor = true
@@ -155,6 +170,9 @@ show_value = false
 
 [widget.temp]
 show_value = false
+
+[widget.widget]
+type = "oldirtty/color_picker:widget"
 
 [widget.workspaces]
 show_labels = false

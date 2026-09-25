@@ -133,9 +133,5 @@ function ya() {
 alias ff=fastfetch
 alias et="mkdir executables testcases"
 
-# Battery
-alias full_charge="echo 0 | sudo tee /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
-alias safe_charge="echo 1 | sudo tee /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
-
 # npm
 source /usr/share/nvm/init-nvm.sh

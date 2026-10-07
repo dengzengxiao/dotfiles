@@ -7,6 +7,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, { buffer = args.buf, desc = "Previous diagnostic" })
         vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, { buffer = args.buf, desc = "Next diagnostic" })
         vim.keymap.set("n", "<leader>ss", function() Snacks.picker.lsp_symbols() end, { buffer = args.buf, desc = "Document symbols" })
-        vim.keymap.set("n", "<leader>sd", function() Snacks.picker.lsp_diagnostics() end, { buffer = args.buf, desc = "Workspace diagnostics" })
+        vim.keymap.set("n", "<leader>sd", function() Snacks.picker.diagnostics() end, { buffer = args.buf, desc = "Workspace diagnostics" })
     end,
 })

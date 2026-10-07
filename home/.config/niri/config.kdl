@@ -161,6 +161,11 @@ output "HDMI-A-1" {
     // position x=0 y=0
 }
 
+cursor {
+    xcursor-theme "everforest-cursors"
+    xcursor-size 28
+}
+
 // output "DP-1" {
 //     mode "1920x1080@60"
 //     scale 1

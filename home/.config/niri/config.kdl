@@ -715,6 +715,10 @@ blur {
     saturation 1.0
 }
 
+//
+// Window Rules
+//
+
 // Floating Noctalia settings window.
 window-rule {
     match app-id="dev.noctalia.Noctalia"
@@ -728,6 +732,7 @@ layer-rule {
     place-within-backdrop true
 }
 
+// Terminal
 window-rule {
     match app-id="com.mitchellh.ghostty"
 
@@ -746,12 +751,7 @@ window-rule {
     }
 }
 
-window-rule {
-    match app-id="chatgpt"
-
-    draw-border-with-background false
-}
-
+// Browser
 window-rule {
     match app-id="firefox"
 
@@ -761,6 +761,14 @@ window-rule {
 }
 
 window-rule {
+    match app-id="chromium"
+
+    open-on-workspace "Browser"
+    draw-border-with-background false
+}
+
+// Chats
+window-rule {
     match app-id="wechat"
     match app-id="QQ"
 
@@ -768,6 +776,7 @@ window-rule {
     draw-border-with-background false
 }
 
+// Steam Apps
 window-rule {
     match app-id="steam"
 
@@ -784,6 +793,36 @@ window-rule {
     open-fullscreen true
     open-on-workspace "Game"
     draw-border-with-background false
+}
+
+// Open Orpheus
+window-rule {
+    match title="^Open Orpheus Menu$"
+
+    open-floating true
+    default-floating-position x=0 y=0 relative-to="top"
+    default-window-height { proportion 1.0; }
+    default-column-width { proportion 1.0; }
+    focus-ring { off; }
+    border { off; }
+}
+
+window-rule {
+    match title="^Open Orpheus Mini Player$"
+
+    open-floating true
+    shadow { off; }
+    focus-ring { off; }
+    border { off; }
+}
+
+window-rule {
+    match title="^Open Orpheus Lyrics$"
+
+    open-floating true
+    shadow { off; }
+    focus-ring { off; }
+    border { off; }
 }
 
 recent-windows {

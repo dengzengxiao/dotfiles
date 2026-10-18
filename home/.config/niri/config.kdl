@@ -776,6 +776,13 @@ window-rule {
     draw-border-with-background false
 }
 
+// Onlyoffice
+window-rule {
+    match app-id="ONLYOFFICE"
+
+    draw-border-with-background false
+}
+
 // Steam Apps
 window-rule {
     match app-id="steam"

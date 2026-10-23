@@ -6,11 +6,12 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
 vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
 
 -- Pairs
-vim.keymap.set("i", "(", "()<left>", { desc = "Insert a ()" })
-vim.keymap.set("i", "[", "[]<left>", { desc = "Insert a []" })
-vim.keymap.set("i", "{", "{}<left>", { desc = "Insert a {}" })
-vim.keymap.set("i", "\'", "\'\'<left>", { desc = "Insert a \'\'" })
-vim.keymap.set("i", "\"", "\"\"<left>", { desc = "Insert a \"\"" })
+-- I have stopped using bracket completions. If you need it, enable it here or load plugins by yourself.:w
+-- vim.keymap.set("i", "(", "()<left>", { desc = "Insert a ()" })
+-- vim.keymap.set("i", "[", "[]<left>", { desc = "Insert a []" })
+-- vim.keymap.set("i", "{", "{}<left>", { desc = "Insert a {}" })
+-- vim.keymap.set("i", "\'", "\'\'<left>", { desc = "Insert a \'\'" })
+-- vim.keymap.set("i", "\"", "\"\"<left>", { desc = "Insert a \"\"" })
 
 -- Snacks picker
 vim.keymap.set("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Find Files" })

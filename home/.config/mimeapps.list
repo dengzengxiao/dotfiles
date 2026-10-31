@@ -16,6 +16,8 @@ application/xhtml+xml=firefox.desktop;
 application/x-extension-xhtml=firefox.desktop;
 application/x-extension-xht=firefox.desktop;
 
+x-scheme-handler/clash=clash-verge.desktop;
+x-scheme-handler/clash-verge=clash-verge.desktop;
 [Default Applications]
 video/mp4=mpv.desktop
 video/x-matroska=mpv.desktop
@@ -60,3 +62,5 @@ application/x-extension-xht=firefox.desktop
 x-scheme-handler/ccswitch=cc-switch-handler.desktop
 x-scheme-handler/chatbox=xyz.chatboxapp.app.desktop
 x-scheme-handler/everest=/home/dengzengxiao/.local/share/applications/Olympus.desktop
+x-scheme-handler/clash=clash-verge.desktop;
+x-scheme-handler/clash-verge=clash-verge.desktop;

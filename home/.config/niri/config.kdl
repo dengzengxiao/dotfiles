@@ -751,22 +751,6 @@ window-rule {
     }
 }
 
-// Browser
-window-rule {
-    match app-id="firefox"
-
-    open-maximized true
-    open-on-workspace "Browser"
-    draw-border-with-background false
-}
-
-window-rule {
-    match app-id="chromium"
-
-    open-on-workspace "Browser"
-    draw-border-with-background false
-}
-
 // Chats
 window-rule {
     match app-id="wechat"

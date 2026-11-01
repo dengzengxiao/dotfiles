@@ -4,7 +4,7 @@ Name=默认
 # Layout
 Default Layout=us
 # Default Input Method
-DefaultIM=pinyin
+DefaultIM=rime
 
 [Groups/0/Items/0]
 # Name
@@ -14,13 +14,7 @@ Name=keyboard-us
 
 [Groups/0/Items/1]
 # Name
-Name=pinyin
-# Layout
-Layout=us
-
-[Groups/0/Items/2]
-# Name
-Name=wbx
+Name=rime
 # Layout
 # Layout=
 

@@ -58,8 +58,8 @@ input {
         // dwtp
         drag true
         // drag-lock
-        // natural-scroll
-        accel-speed 0.5
+        natural-scroll
+        accel-speed 0.05
         accel-profile "flat"
         scroll-method "two-finger"
         // disabled-on-external-mouse

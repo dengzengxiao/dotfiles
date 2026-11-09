@@ -5,13 +5,6 @@ vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
 vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
 vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
 
--- Pairs
-vim.keymap.set("i", "(", "()<left>", { desc = "Insert a ()" })
-vim.keymap.set("i", "[", "[]<left>", { desc = "Insert a []" })
-vim.keymap.set("i", "{", "{}<left>", { desc = "Insert a {}" })
-vim.keymap.set("i", "\'", "\'\'<left>", { desc = "Insert a \'\'" })
-vim.keymap.set("i", "\"", "\"\"<left>", { desc = "Insert a \"\"" })
-
 -- Snacks picker
 vim.keymap.set("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Find Files" })
 vim.keymap.set("n", "<leader>fr", function() Snacks.picker.recent() end, { desc = "Recent Files" })
@@ -34,8 +27,8 @@ vim.keymap.set("n", "<leader>cx", "<Cmd>CompetiTest receive problem<CR>", opts)
 
 -- OI
 vim.keymap.set("n", "<F2>", "<Cmd>vnew %:r.log<CR><Cmd>wincmd L<CR><Cmd>w<CR><Cmd>wincmd 50<<CR><Cmd>new %:r.out<CR><Cmd>w<CR><Cmd>new %:r.in<CR><Cmd>w<CR><Cmd>wincmd h<CR>", { desc = "create problem" })
-vim.keymap.set("n", "<F3>", ":!g++ %:r.cpp -std=c++14 -O2 -Wall -DLOCAL -static -Wfatal-errors -o %:r", { desc = "Compile problem" })
-vim.keymap.set("n", "<F4>", ":!g++ %:r.cpp -std=c++14 -O2 -Wall -DLOCAL -Wfatal-errors -fsanitize=address -o %:r", { desc = "Compile problem" })
+vim.keymap.set("n", "<F3>", ":!g++ %:r.cpp -std=c++14 -O2 -Wall -DLOCAL -Wfatal-errors -static -o %:r", { desc = "Compile problem" })
+vim.keymap.set("n", "<F4>", ":!g++ %:r.cpp -std=c++14 -O2 -Wall -DLOCAL -Wfatal-errors -fsanitize=address -g3 -o %:r", { desc = "Compile problem with -fsanitize" })
 vim.keymap.set("n", "<F5>", ":!time ./%:r 2> %:r.log", { desc = "Run without file I/O" })
 vim.keymap.set("n", "<F6>", ":!time ./%:r < %:r.in > %:r.out 2> %:r.log", { desc = "Run with file I/O" })
 

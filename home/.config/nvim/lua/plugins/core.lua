@@ -41,6 +41,17 @@ return {
 		end,
         opts = {},
     },
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        opts = {
+            -- Use cpp-pairs.lua for these files
+            disable_filetype = {
+                "c", "cpp", "h", "hpp",
+                "TelescopePrompt", "spectre_panel", "snacks_picker_input",
+            },
+        },
+    },
 	{
 		"akinsho/bufferline.nvim",
 		event = "VeryLazy",
